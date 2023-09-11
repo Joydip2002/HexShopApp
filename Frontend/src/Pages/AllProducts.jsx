@@ -49,12 +49,10 @@ function ManProduct() {
                                 </CardContent>
                                 <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <Typography variant="h6" component='div'>{item.price} </Typography>
-                                    <productsHover >
                                         <Box sx={{}} >
-                                            <Link to="/single-product-page"><IconButton><RemoveRedEyeIcon /></IconButton></Link>
-                                            <IconButton><ShoppingCartIcon /></IconButton>
+                                            <Link to={`/single-product-page/${item.id}`}><IconButton><RemoveRedEyeIcon /></IconButton></Link>
+                                            {/* <IconButton><ShoppingCartIcon /></IconButton> */}
                                         </Box>
-                                    </productsHover>
                                     <IconButton><ShareIcon /></IconButton>
                                 </CardActions>
                             </Card>

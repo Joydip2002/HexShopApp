@@ -22,7 +22,7 @@ function HomePage() {
      const { data } = useApi();
 
     // Use the data in your component
-    console.log(data);
+    // console.log(data);
     return (
         <>
             <Navbar />

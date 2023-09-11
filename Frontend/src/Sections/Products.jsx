@@ -28,10 +28,10 @@ const productsHover = styled(Box)(({ theme }) => ({
     '&:hover': { backgroundColor: theme.palette.primary.main, zIndex: 1000, position: 'absolute', visibility: 'visible' },
 }));
 const API = "https://dummyjson.com/products?limit=100";
-function Products({data}) {
+function Products({ data }) {
     const [getData, setData] = useState([]);
     const theme = useTheme();
-    
+
     // const [isBtnOpen, setBtnOpen] = useState('');
     // useEffect(() => {
     //     if (isBtnOpen !== "") {
@@ -39,7 +39,7 @@ function Products({data}) {
     //     }
     // }, [isBtnOpen])
 
-  
+
 
     return (
         <div id="men-products">
@@ -64,7 +64,7 @@ function Products({data}) {
                         <>
                             {item.category === 'mens-shirts' ?
                                 <SwiperSlide>
-                                    <Card sx={{ maxWidth: 345, my:'2rem'}} key={index + 1}>
+                                    <Card sx={{ maxWidth: 345, my: '2rem' }} key={index + 1}>
                                         <CardMedia
                                             sx={{ height: 340 }}
                                             image={item.thumbnail}
@@ -75,20 +75,20 @@ function Products({data}) {
                                                 {item.title}
                                             </Typography>
                                             <Typography variant="body2" color="text.secondary">
-                                               {item.description}
+                                                {item.description}
                                             </Typography>
                                         </CardContent>
                                         <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <Typography variant="h6" component='div'>{item.price} </Typography>
                                             <Box sx={{}} >
-                                                <Link to="/single-product-page"><IconButton><RemoveRedEyeIcon /></IconButton></Link>
-                                                <IconButton><ShoppingCartIcon /></IconButton>
+                                                <Link to={`/single-product-page/${item.id}`}><IconButton><RemoveRedEyeIcon /></IconButton></Link>
+                                                {/* <IconButton><ShoppingCartIcon /></IconButton> */}
                                             </Box>
                                             <IconButton><ShareIcon /></IconButton>
                                         </CardActions>
                                     </Card>
-                                </SwiperSlide> :''
-                             } 
+                                </SwiperSlide> : ''
+                            }
                         </>
                     ))}
                 </Swiper>

@@ -9,12 +9,12 @@ import 'swiper/css/scrollbar';
 import ShareIcon from '@mui/icons-material/Share';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Link from '@mui/material/Link';
+import { Link } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import BackToTop from "./BackToTop1.jsx";
 import { useApi } from "../Context/ApiContext";
 function WomenProducts() {
-    const {data} = useApi();
+    const { data } = useApi();
     return (
         <>
             <Navbar />
@@ -31,7 +31,7 @@ function WomenProducts() {
                     <Typography variant="h5" component="div" sx={{ fontWeight: 900 }}>Men's Latest</Typography>
                     <Typography variant="" component="div" sx={{ fontStyle: 'italic', color: 'grey' }}>Details to details is what makes Hexashop different from the other themes.</Typography>
                 </Box>
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: '2rem',my:'1rem'}}>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: '2rem', my: '1rem' }}>
                     {data.map((item, index) => (
                         <>
                             {item.category === 'womens-dresses' ?
@@ -54,8 +54,8 @@ function WomenProducts() {
                                             <Typography variant="h6" component='div'>{item.price} </Typography>
                                             <productsHover >
                                                 <Box sx={{}} >
-                                                    <Link href="/single-product-page"><IconButton><RemoveRedEyeIcon /></IconButton></Link>
-                                                    <IconButton><ShoppingCartIcon /></IconButton>
+                                                    <Link to={`/single-product-page/${item.id}`}><IconButton><RemoveRedEyeIcon /></IconButton></Link>
+                                                    {/* <IconButton><ShoppingCartIcon /></IconButton> */}
                                                 </Box>
                                             </productsHover>
                                             <IconButton><ShareIcon /></IconButton>

@@ -1,9 +1,12 @@
-import { AppBar, Box, Container, IconButton, MenuItem, Toolbar, Typography, Drawer, List, ListItem, ListItemText } from "@mui/material";
+import { AppBar, Box, Container, IconButton, MenuItem, Toolbar, Typography, Drawer, List } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import React, { useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
 // import { Link } from "react-router-dom";
 import { HashLink as Link } from 'react-router-hash-link';
+import Badge from '@mui/material/Badge';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useCartContext } from "../Context/CartContext";
 
 const pages = [
     { category: 'Home', Link: '/' },
@@ -16,6 +19,8 @@ const pages = [
 ];
 
 function Navbar() {
+    const{cart} = useCartContext();
+    const itemCount = cart.length;
     const [isOpenMenu, setOpenMenu] = useState(false);
 
     const toggleMenu = () => {
@@ -29,14 +34,21 @@ function Navbar() {
                     <Toolbar>
                         <Container sx={{ display: "flex" }}>
                             <Typography sx={{ ml: 2, flex: 1 }} variant="a" component="div">
-                               <Link to="/"> <img src="Images/logo.png" alt="" /></Link>
+                                <Link to="/"> <img src="Images/logo.png" alt="" /></Link>
                             </Typography>
                             <Box sx={{ color: "black", justifyContent: "center", alignItems: "center", display: { xs: 'none', md: 'flex' }, mr: 1 }}>
                                 {pages.map((page, index) => (
                                     <MenuItem key={index}>
-                                        <Link to={page.Link} textAlign="center" style={{ textDecoration: 'none',color:'black' }} >{page.category}</Link>
+                                        <Link to={page.Link} textAlign="center" style={{ textDecoration: 'none', color: 'black' }} >{page.category}</Link>
                                     </MenuItem>
                                 ))}
+                                <Link to='/my-cart'>
+                                    <IconButton aria-label="cart">
+                                        <Badge badgeContent={itemCount} color="secondary">
+                                            <ShoppingCartIcon />
+                                        </Badge>
+                                    </IconButton>
+                                </Link>
                             </Box>
                             <IconButton sx={{ display: { md: 'none' } }} onClick={toggleMenu}>
                                 <MenuIcon />
@@ -53,7 +65,7 @@ function Navbar() {
                 <List>
                     {pages.map((page, index) => (
                         <MenuItem key={index}>
-                            <Link to={page.Link} textAlign="center" style={{ textDecoration: 'none',color:'black'}} >{page.category}</Link>
+                            <Link to={page.Link} textAlign="center" style={{ textDecoration: 'none', color: 'black' }} >{page.category}</Link>
                         </MenuItem>
                     ))}
                 </List>

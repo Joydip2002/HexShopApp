@@ -8,9 +8,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import ShareIcon from '@mui/icons-material/Share';
-import data from '../data'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from "react-router-dom";
 
 const Border = styled('div')(({ theme }) => ({
@@ -19,7 +17,7 @@ const Border = styled('div')(({ theme }) => ({
     'margin-top': '3rem'
 }));
 
-function WomenProducts({data}) {
+function WomenProducts({ data }) {
     return (
         <div id="women-products">
             <Border></Border>
@@ -42,7 +40,7 @@ function WomenProducts({data}) {
                         <>
                             {item.category === 'womens-dresses' ?
                                 <SwiperSlide>
-                                    <Card sx={{ maxWidth: 340, my:'2rem' }} key={index}>
+                                    <Card sx={{ maxWidth: 340, my: '2rem' }} key={index}>
                                         <CardMedia
                                             sx={{ height: 340 }}
                                             image={item.thumbnail}
@@ -58,11 +56,11 @@ function WomenProducts({data}) {
                                         </CardContent>
                                         <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <Typography variant="h6" component='div'>{item.price} </Typography>
-                                                <Box sx={{}} >
-                                                    <Link to="/single-product-page"><IconButton><RemoveRedEyeIcon /></IconButton></Link>
-                                                    <IconButton><ShoppingCartIcon /></IconButton>
-                                                </Box>
-                                                <ShareIcon/>
+                                            <Box sx={{}} >
+                                                <Link to={`/single-product-page/${item.id}`}><IconButton><RemoveRedEyeIcon /></IconButton></Link>
+                                                {/* <IconButton><ShoppingCartIcon /></IconButton> */}
+                                            </Box>
+                                            <ShareIcon />
                                         </CardActions>
                                     </Card>
                                 </SwiperSlide> : ''

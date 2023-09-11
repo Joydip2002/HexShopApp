@@ -12,16 +12,16 @@ import AccessoriesPage from "./Pages/AccessoriesPage";
 import AllProduct from "./Pages/AllProducts";
 import BackToTop from "./Pages/BackToTop1.jsx";
 import AdminDashboard from "./Admin/AdminDashboard";
-import { ApiProvider } from "./Context/ApiContext";
+import Mycart from "./Pages/Mycart";
 
 
 function App() {
   return (
-    <ApiProvider>
+   
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="single-product-page" element={<SingleProductsPage />} />
+          <Route path="single-product-page/:id" element={<SingleProductsPage />} />
           <Route path="contact" element={<ContactUsPage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="men-product" element={<ManProduct />} />
@@ -30,13 +30,14 @@ function App() {
           <Route path="accessories-product" element={<AccessoriesPage />} />
           <Route path="all-product" element={<AllProduct />} />
           <Route path="back-To-Top" element={<BackToTop />} />
+          <Route path="my-cart" element={<Mycart/>} />
           <Route path="*" element={<ErrorPage />} />
 
           {/* Admin route */}
           <Route path="admin-dashboard" element={<AdminDashboard />} />
         </Routes>
       </BrowserRouter>
-    </ApiProvider>
+
   );
 }
 

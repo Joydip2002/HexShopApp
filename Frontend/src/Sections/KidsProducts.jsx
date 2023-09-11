@@ -28,7 +28,7 @@ const productsHover = styled(Box)(({ theme }) => ({
     '&:hover': { backgroundColor: theme.palette.primary.main, zIndex: 1000, position: 'absolute', visibility: 'visible' },
 }));
 
-function Products({data}) {
+function Products({ data }) {
     // const data = useContext(golbalApiContext);
     // const [data, setData] = useState([]);
     // const useFetch = (url) => {
@@ -55,13 +55,13 @@ function Products({data}) {
         <div id="kids-product">
 
             <Border></Border>
-            <Container sx={{my:'1rem'}}>
+            <Container sx={{ my: '1rem' }}>
                 <Box sx={{ py: 4 }}>
                     <Typography variant="h5" component="div" sx={{ fontWeight: 900 }}>Kid's Latest</Typography>
                     <Typography variant="" component="div" sx={{ fontStyle: 'italic', color: 'grey' }}>Details to details is what makes Hexashop different from the other themes.</Typography>
                 </Box>
                 <Swiper
-                    modules={[Navigation,Pagination, A11y]}
+                    modules={[Navigation, Pagination, A11y]}
                     spaceBetween={50}
                     slidesPerView={3}
                     navigation
@@ -74,7 +74,7 @@ function Products({data}) {
                         <>
                             {item.category === 'tops' ?
                                 <SwiperSlide>
-                                    <Card sx={{ maxWidth: 345 , my:'2rem'}} key={index}>
+                                    <Card sx={{ maxWidth: 345, my: '2rem' }} key={index}>
                                         <CardMedia
                                             sx={{ height: 340 }}
                                             image={item.thumbnail}
@@ -85,14 +85,14 @@ function Products({data}) {
                                                 {item.title}
                                             </Typography>
                                             <Typography variant="body2" color="text.secondary">
-                                                 {item.description}
+                                                {item.description}
                                             </Typography>
                                         </CardContent>
                                         <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <Typography variant="h6" component='div'>{item.price} </Typography>
                                             <Box sx={{}} >
-                                                <Link to="/single-product-page"><IconButton><RemoveRedEyeIcon /></IconButton></Link>
-                                                <IconButton><ShoppingCartIcon /></IconButton>
+                                                <Link to={`/single-product-page/${item.id}`}><IconButton><RemoveRedEyeIcon /></IconButton></Link>
+                                                {/* <IconButton><ShoppingCartIcon /></IconButton> */}
                                             </Box>
                                             <IconButton><ShareIcon /></IconButton>
                                         </CardActions>
