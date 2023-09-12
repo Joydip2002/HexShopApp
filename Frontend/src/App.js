@@ -13,6 +13,7 @@ import AllProduct from "./Pages/AllProducts";
 import BackToTop from "./Pages/BackToTop1.jsx";
 import AdminDashboard from "./Admin/AdminDashboard";
 import Mycart from "./Pages/Mycart";
+import BuyButtonComponent from "./Pages/BuyButtonComponent";
 
 
 function App() {
@@ -31,6 +32,8 @@ function App() {
           <Route path="all-product" element={<AllProduct />} />
           <Route path="back-To-Top" element={<BackToTop />} />
           <Route path="my-cart" element={<Mycart/>} />
+          {/* <Route path="payment-page" element={<PaymentForm/>} /> */}
+          <Route path="payment-page" element={<BuyButtonComponent/>} />
           <Route path="*" element={<ErrorPage />} />
 
           {/* Admin route */}

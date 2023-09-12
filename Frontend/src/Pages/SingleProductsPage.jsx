@@ -35,14 +35,7 @@ function SingleProductsPage() {
     return (
         <>
             <Navbar />
-            {/* <Box sx={{ height: "25rem", width: '100%', backgroundImage: "url('Images/singlepage.png')", backgroundRepeat: 'no-repeat', backgroundSize: 'cover', position: 'relative', imageResolution: 'from-image 300dpi' }}>
-                <Typography varient="h6" component="div" sx={{ position: 'absolute', transform: 'translate(-50%,-50%)', top: '50%', left: '50%', textAlign: 'center' }}>
-                    <Stack>
-                        <List sx={{ fontSize: "2rem", fontWeight: 900, color: 'white' }}> Single Product Page</List>
-                        <List sx={{ color: 'white' }}>Awesome & Creative HTML CSS layout by TemplateMo</List>
-                    </Stack>
-                </Typography> 
-            </Box> */}
+ 
             <Box sx={{ mt: '5rem', mb: '2rem' }}>
                 <Container sx={{ display: 'flex' }}>
                     <Box sx={{}}>
@@ -59,7 +52,7 @@ function SingleProductsPage() {
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '2rem', borderBottom: '1px solid gray', pb: '1rem' }}>
                             <Box>
                                 <Typography varient="h6" component="div" sx={{ fontSize: '1.4rem', fontWeight: 600 }}>{productData?.title}</Typography>
-                                <Typography varient="h6" component="div" sx={{ fontSize: '1.2rem', fontWeight: 600, color: 'gray' }}>{productData?.price}</Typography>
+                                <Typography varient="h6" component="div" sx={{ fontSize: '1.2rem', fontWeight: 600, color: 'gray' }}>₹{productData?.price}</Typography>
                             </Box>
                             <Box>
                                 <Rating name="half-rating" size="small" defaultValue={5} precision={0.5} />

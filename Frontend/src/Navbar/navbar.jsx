@@ -44,7 +44,7 @@ function Navbar() {
                                 ))}
                                 <Link to='/my-cart'>
                                     <IconButton aria-label="cart">
-                                        <Badge badgeContent={itemCount} color="secondary">
+                                        <Badge badgeContent={itemCount>0?itemCount:0} color="secondary">
                                             <ShoppingCartIcon />
                                         </Badge>
                                     </IconButton>

@@ -1,21 +1,31 @@
 
 function CartReducer(state, action) {
     if (action.type === "ADD_TO_CART") {
-        let  products  = action.payload;
+        let products = action.payload;
         // alert("hello");
         console.log("add to cart", products);
 
         let cartProduct;
-        cartProduct ={ 
-            id :  products.productData.id,
-            title :  products.productData.title,
-            thumbnail :  products.productData.thumbnail,
-            price :  products.productData.price,
-            quantity :  products.isSetData
+        cartProduct = {
+            id: products.productData.id,
+            title: products.productData.title,
+            thumbnail: products.productData.thumbnail,
+            price: products.productData.price,
+            quantity: products.isSetData
         };
-        return{
+        return {
             ...state,
-            cart:[...state.cart,cartProduct],
+            cart: [...state.cart, cartProduct],
+        }
+    }
+
+    if (action.type === 'REMOVE_TO_CART') {
+        console.log("remove");
+        let id = action.payload;
+        let updatedCart = state.cart.pop(id);
+        return {
+            ...state,
+            cart: updatedCart
         }
     }
     return state;

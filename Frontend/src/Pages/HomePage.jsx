@@ -25,7 +25,7 @@ function HomePage() {
     // console.log(data);
     return (
         <>
-            <Navbar />
+            <Navbar/>
             <MainBanner />
             <Products data = {data}/>
             <WomenProducts data = {data}/>

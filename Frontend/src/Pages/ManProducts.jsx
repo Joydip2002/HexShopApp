@@ -51,7 +51,7 @@ function ManProduct() {
                                             </Typography>
                                         </CardContent>
                                         <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                            <Typography variant="h6" component='div'>{item.price} </Typography>
+                                            <Typography variant="h6" component='div'>₹{item.price} </Typography>
                                             <productsHover >
                                                 <Box sx={{}} >
                                                     <Link to={`/single-product-page/${item.id}`}><IconButton><RemoveRedEyeIcon /></IconButton></Link>
