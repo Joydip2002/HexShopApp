@@ -18,7 +18,7 @@ function SingleProductsPage() {
     const [productData, setProductData] = useState(null);
     // console.log(productData);
 
-    const getProductData = async (id) => {
+    const getProductData = async () => {
         try {
             const res = await axios.get(`http://127.0.0.1:8000/api/posts/${id}`);
             // console.log(res);
@@ -28,14 +28,14 @@ function SingleProductsPage() {
         }
     }
 
-    useEffect(() => {
-        getProductData(id);
-    }, [id])
+    getProductData();
+        useEffect(() => {
+    }, [])
 
     return (
         <>
             <Navbar />
- 
+
             <Box sx={{ mt: '5rem', mb: '2rem' }}>
                 <Container sx={{ display: 'flex' }}>
                     <Box sx={{}}>
@@ -76,7 +76,7 @@ function SingleProductsPage() {
                                     <Button onClick={() => setData(isSetData + 1)} ><AddIcon /></Button>
                                 </ButtonGroup>
                             </Box>
-                            <Link to='/my-cart'><Button variant="contained" onClick={() => addToCart(productData,isSetData)}>Add To Cart</Button></Link>
+                            <Link to='/my-cart'><Button variant="contained" onClick={() => addToCart(productData, isSetData)}>Add To Cart</Button></Link>
                         </Box>
                     </Box>
                 </Container>

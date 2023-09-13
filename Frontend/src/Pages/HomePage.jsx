@@ -20,6 +20,7 @@ function HomePage() {
     //     getProductData(API);
     // }, []);
      const { data } = useApi();
+     
 
     // Use the data in your component
     // console.log(data);

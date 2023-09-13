@@ -14,6 +14,8 @@ import BackToTop from "./Pages/BackToTop1.jsx";
 import AdminDashboard from "./Admin/AdminDashboard";
 import Mycart from "./Pages/Mycart";
 import BuyButtonComponent from "./Pages/BuyButtonComponent";
+import PaymentForm from "./Pages/PaymentForm";
+import Login from "./Main/Login";
 
 
 function App() {
@@ -21,6 +23,9 @@ function App() {
    
       <BrowserRouter>
         <Routes>
+          {/* Login */}
+          <Route path="login" element = {<Login/>} />
+
           <Route path="/" element={<HomePage />} />
           <Route path="single-product-page/:id" element={<SingleProductsPage />} />
           <Route path="contact" element={<ContactUsPage />} />
@@ -32,8 +37,8 @@ function App() {
           <Route path="all-product" element={<AllProduct />} />
           <Route path="back-To-Top" element={<BackToTop />} />
           <Route path="my-cart" element={<Mycart/>} />
-          {/* <Route path="payment-page" element={<PaymentForm/>} /> */}
-          <Route path="payment-page" element={<BuyButtonComponent/>} />
+          <Route path="payment-page" element={<PaymentForm/>} />
+          {/* <Route path="payment-page" element={<BuyButtonComponent/>} /> */}
           <Route path="*" element={<ErrorPage />} />
 
           {/* Admin route */}

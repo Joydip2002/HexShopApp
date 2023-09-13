@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useCartContext } from '../Context/CartContext'
 
 import Table from '@mui/material/Table';
@@ -8,19 +8,23 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Box, Button, IconButton, Typography } from '@mui/material';
+import { Box, Button, ButtonGroup, IconButton, Typography } from '@mui/material';
 import Navbar from '../Navbar/navbar';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom';
 import StripeCheckout from 'react-stripe-checkout';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import { useCartApi } from '../Context/CartApiContextB';
 
 function Mycart() {
+  const { cartData, removeItem, reduceQuantity, IncreaseQuantity } = useCartApi();
 
-  const { cart, removeItem } = useCartContext();
-  // const {} = useCartContext();
-  const cl = cart.length;
-  const totalSum = cl > 0 ? cart.reduce((accumulator, currentItem) => accumulator + (currentItem.price * currentItem.quantity), 0) : 0;
-  console.log("Cart Data is ", cart);
+  // const { cart, removeItem } = useCartContext();
+  const cl = cartData.length;
+  // alert(cl);
+  const totalSum = cl > 0 ? cartData.reduce((accumulator, currentItem) => accumulator + (currentItem.price * currentItem.quantity), 0) : 0;
+  console.log("Cart Data is ", cartData);
   return (
     <div>
       <Navbar />
@@ -39,17 +43,25 @@ function Mycart() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {cart.map((row) => (
+            {cartData.map((row) => (
               <TableRow
                 key={row.name}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row" >
-                  <img src={row.thumbnail} alt="" width='100px' />
+                  <img src={row.picture} alt="" width='100px' />
                 </TableCell>
                 <TableCell>{row.title}</TableCell>
                 <TableCell>₹{row.price}</TableCell>
-                <TableCell>{row.quantity}</TableCell>
+                <TableCell>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <ButtonGroup variant="outlined" aria-label="outlined button group" size="small">
+                      <Button onClick={() => { if(row.quantity > 1){reduceQuantity(row?.id)}}} ><RemoveIcon /></Button>
+                      <Button>{row.quantity}</Button>
+                      <Button onClick={() => IncreaseQuantity(row?.id)}><AddIcon /></Button>
+                    </ButtonGroup>
+                  </Box>
+                </TableCell>
                 <TableCell><IconButton onClick={() => removeItem(row?.id)}><DeleteIcon sx={{ color: 'red' }} /></IconButton></TableCell>
               </TableRow>
             ))}

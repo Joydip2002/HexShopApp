@@ -15,6 +15,7 @@ import Footer from "../Footer/Footer";
 import { useApi } from "../Context/ApiContext";
 function ManProduct() {
     const { data } = useApi();
+    // alert("home")
     return (
         <>
             <Navbar />
@@ -43,10 +44,10 @@ function ManProduct() {
                                             title="green iguana"
                                         />
                                         <CardContent>
-                                            <Typography gutterBottom variant="h5" component="div">
+                                            <Typography gutterBottom variant="h5" component="div" sx={{maxHeight:'40px', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis'}}>
                                                 {item.title}
                                             </Typography>
-                                            <Typography variant="body2" color="text.secondary">
+                                            <Typography variant="body2" color="text.secondary" sx={{maxHeight:'200px', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis'}}>
                                                 {item.description}
                                             </Typography>
                                         </CardContent>

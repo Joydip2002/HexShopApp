@@ -19,15 +19,13 @@ function AboutPage() {
                     </Stack>
                 </Typography>
             </Box>
-            <Box sx={{ mt: '5rem', mb: '2rem' }}>
-                <Container sx={{ display: 'flex' }}>
+            <Box sx={{ mt: '5rem', mb: '2rem'  }}>
+                <Container sx={{ display: 'flex', justifyContent:'center',flexWrap:'wrap'}}>
                     <Box sx={{}}>
                         {/* <img src="single-product-01.jpg" alt="" /> */}
                         <CardMedia
                             component="img"
                             alt="green iguana"
-                            height="100%"
-                            width="100%"
                             image="Images/baner-right-image-03.jpg"
                         />
                     </Box>

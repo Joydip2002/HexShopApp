@@ -74,3 +74,15 @@
 // };
 
 // export default injectStripe(PaymentForm);
+import React from 'react'
+
+function PaymentForm() {
+    alert("home")
+  return (
+    <div>
+      hghfhvhb
+    </div>
+  )
+}
+
+export default PaymentForm

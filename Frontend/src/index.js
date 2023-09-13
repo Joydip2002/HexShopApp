@@ -3,14 +3,15 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { ApiProvider } from './Context/ApiContext';
 import { CartProvider } from './Context/CartContext';
+import { CartApiProvide } from './Context/CartApiContextB';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <ApiProvider>
+  <ApiProvider>
+    <CartApiProvide>
       <CartProvider>
-      <App />
+        <App />
       </CartProvider>
-    </ApiProvider>
-  </React.StrictMode>
+    </CartApiProvide>
+  </ApiProvider>
 );

@@ -7,6 +7,7 @@ import { HashLink as Link } from 'react-router-hash-link';
 import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useCartContext } from "../Context/CartContext";
+import { useCartApi } from "../Context/CartApiContextB";
 
 const pages = [
     { category: 'Home', Link: '/' },
@@ -19,8 +20,9 @@ const pages = [
 ];
 
 function Navbar() {
-    const{cart} = useCartContext();
-    const itemCount = cart.length;
+    // const{cart} = useCartContext();
+    const {cartData} = useCartApi();
+    const itemCount = cartData.length;
     const [isOpenMenu, setOpenMenu] = useState(false);
 
     const toggleMenu = () => {
