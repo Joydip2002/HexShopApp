@@ -28,8 +28,8 @@ function SingleProductsPage() {
         }
     }
 
-    getProductData();
-        useEffect(() => {
+    useEffect(() => {
+        getProductData();
     }, [])
 
     return (

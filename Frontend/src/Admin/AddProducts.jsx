@@ -15,6 +15,7 @@ function AddProducts() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(pdata);
         try {
             const response = await axios.post('http://localhost:8000/api/posts', pdata, {
                 headers: {

@@ -16,13 +16,38 @@ import StripeCheckout from 'react-stripe-checkout';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { useCartApi } from '../Context/CartApiContextB';
+import { loadStripe } from '@stripe/stripe-js';
 
 function Mycart() {
   const { cartData, removeItem, reduceQuantity, IncreaseQuantity } = useCartApi();
 
-  // const { cart, removeItem } = useCartContext();
+
+// Payment Part
+  const makePayment = async () => {
+    const stripe = await loadStripe("pk_test_51NpTJSSJq8hcq8qPS6OJNbi2G46ZN3y54AplJyppTpGRiZ28MJDxlU8jyjcd41nzvQtNWgFR6QGkASJYyyWkKB4D00dnqFQZXT");
+    const body = {
+      products: cartData
+    }
+    const headers = {
+      "Content-Type": "application/json",
+    }
+    const response = await fetch('http://localhost:8000/api/payment', {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(body)
+    });
+
+    const session = await response.json();
+
+    const result = stripe.redirectToCheckout({
+      sessionId: session.id
+    });
+    if (result.error) {
+      console.log(result.error);
+    }
+  }
+
   const cl = cartData.length;
-  // alert(cl);
   const totalSum = cl > 0 ? cartData.reduce((accumulator, currentItem) => accumulator + (currentItem.price * currentItem.quantity), 0) : 0;
   console.log("Cart Data is ", cartData);
   return (
@@ -56,7 +81,7 @@ function Mycart() {
                 <TableCell>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <ButtonGroup variant="outlined" aria-label="outlined button group" size="small">
-                      <Button onClick={() => { if(row.quantity > 1){reduceQuantity(row?.id)}}} ><RemoveIcon /></Button>
+                      <Button onClick={() => { if (row.quantity > 1) { reduceQuantity(row?.id) } }} ><RemoveIcon /></Button>
                       <Button>{row.quantity}</Button>
                       <Button onClick={() => IncreaseQuantity(row?.id)}><AddIcon /></Button>
                     </ButtonGroup>
@@ -75,41 +100,9 @@ function Mycart() {
             {/* <Link to='/checkout'><button type='submit' class='btn btn-primary mt-3 mb-3'>Checkout Now!</button></Link> */}
           </Box>
           <Box sx={{ display: 'flex', justifyContent: '' }}>
-            <Link to='/payment-page'>
-              <Button variant='contained'>
-                Buy Now
-              </Button>
-            </Link>
-            {/* <StripeCheckout
-              name="Three Comma Co."  
-              description="Big Data Stuff"  
-              image="https://www.vidhub.co/assets/logos/vidhub-icon-2e5c629f64ced5598a56387d4e3d0c7c.png"  
-              ComponentClass="div"
-              panelLabel="Give Money"  
-              amount={totalSum}  
-              currency="USD"
-              stripeKey="..."
-              locale="zh"
-              email="info@vidhub.co"
-              shippingAddress
-              billingAddress={false}
-              zipCode={false}
-              alipay 
-              bitcoin  
-              allowRememberMe 
-              token={this.onToken} 
-              opened={this.onOpened}  
-              closed={this.onClosed}  
-            
-              reconfigureOnUpdate={false}
-                
-              triggerEvent="onTouchTap"
-            >
-              <button className="btn btn-primary">
-                Use your own child component, which gets wrapped in whatever
-                component you pass into as "ComponentClass" (defaults to span)
-              </button>
-            </StripeCheckout> */}
+            <Button variant='contained' onClick={makePayment}>
+              Buy Now
+            </Button>
           </Box>
         </Box>
       </TableContainer>

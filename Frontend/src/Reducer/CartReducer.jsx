@@ -14,7 +14,7 @@ function CartReducer(state, action) {
         };
         const addToCart = async () => {
             try {
-                const response = await axios.post("http://localhost:8000/api/store-cartlist", cartProduct);
+                const response = await axios.post("http://127.0.0.1:8000/api/store-cartlist", cartProduct);
                 console.log("Add to cart response:", response.data);
             } catch (error) {
                 if (error.response) {

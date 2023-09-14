@@ -16,6 +16,9 @@ import Mycart from "./Pages/Mycart";
 import BuyButtonComponent from "./Pages/BuyButtonComponent";
 import PaymentForm from "./Pages/PaymentForm";
 import Login from "./Main/Login";
+import Registration from "./Main/Registration";
+import Success from "./Pages/success";
+import Cancel from "./Pages/Cancel";
 
 
 function App() {
@@ -25,6 +28,7 @@ function App() {
         <Routes>
           {/* Login */}
           <Route path="login" element = {<Login/>} />
+          <Route path="register" element = {<Registration/>} />
 
           <Route path="/" element={<HomePage />} />
           <Route path="single-product-page/:id" element={<SingleProductsPage />} />
@@ -43,6 +47,8 @@ function App() {
 
           {/* Admin route */}
           <Route path="admin-dashboard" element={<AdminDashboard />} />
+          <Route path="success" element={<Success />} />
+          <Route path="cancel" element={<Cancel />} />
         </Routes>
       </BrowserRouter>
 
