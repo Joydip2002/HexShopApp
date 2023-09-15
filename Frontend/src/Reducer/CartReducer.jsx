@@ -10,8 +10,10 @@ function CartReducer(state, action) {
             title: products.productData.title,
             thumbnail: products.productData.thumbnail,
             price: products.productData.price,
-            quantity: products.isSetData
+            quantity: products.isSetData,
+            user_id : sessionStorage.getItem('id')
         };
+        console.log("here is data",cartProduct);
         const addToCart = async () => {
             try {
                 const response = await axios.post("http://127.0.0.1:8000/api/store-cartlist", cartProduct);

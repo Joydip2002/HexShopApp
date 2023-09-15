@@ -5,11 +5,14 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HomeIcon from '@mui/icons-material/Home';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LockIcon from '@mui/icons-material/Lock';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+
+const baseURL = process.env.REACT_APP_BASE_URL;
 
 function Registration() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -24,25 +27,24 @@ function Registration() {
         console.log(formData);
 
         try {
-            const res = await axios.post(' http://127.0.0.1:8000/api/register',formData);
+            const res = await axios.post(`${baseURL}/register`,formData);
             console.log(res);
             if(res.data.status === 200){
                 Swal.fire({
                     title:'Register Successful',
                     icon : 'success',
-                }).then(function() {
-                    window.location = "/login";
-                });
-                this.setFormData({
+                })
+                setFormData({
                     name: '',
                     email: '',
                     address: '',
                     mobile: '',
                     password: '',
                 })
+                navigate('/login');
             }
             else{
-                this.setFormData({
+                setFormData({
                     'errorList' : res.data.error
                 })
             }

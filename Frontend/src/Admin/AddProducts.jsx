@@ -17,7 +17,7 @@ function AddProducts() {
         e.preventDefault();
         console.log(pdata);
         try {
-            const response = await axios.post('http://localhost:8000/api/posts', pdata, {
+            const response = await axios.post('http://127.0.0.1:8000/api/posts', pdata, {
                 headers: {
                     'content-type': 'application/json',
                 //  'Access-Control-Allow-Origin': 'csrfprotection-client.com' 

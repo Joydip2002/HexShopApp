@@ -21,6 +21,14 @@ import { loadStripe } from '@stripe/stripe-js';
 function Mycart() {
   const { cartData, removeItem, reduceQuantity, IncreaseQuantity } = useCartApi();
 
+  const refresh=()=>{
+    // navigate
+  }
+
+  useEffect(()=>{
+    refresh();
+  },[])
+
 
 // Payment Part
   const makePayment = async () => {

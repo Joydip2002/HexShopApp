@@ -1,6 +1,6 @@
-import { AppBar, Box, Container, IconButton, MenuItem, Toolbar, Typography, Drawer, List } from "@mui/material";
+import { AppBar, Box, Container, IconButton, MenuItem, Toolbar, Typography, Drawer, List, Button } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
 // import { Link } from "react-router-dom";
 import { HashLink as Link } from 'react-router-hash-link';
@@ -8,6 +8,7 @@ import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useCartContext } from "../Context/CartContext";
 import { useCartApi } from "../Context/CartApiContextB";
+import { useNavigate } from "react-router-dom";
 
 const pages = [
     { category: 'Home', Link: '/' },
@@ -20,14 +21,30 @@ const pages = [
 ];
 
 function Navbar() {
+    const navigate = useNavigate();
+    const [getUser, setUser] = useState('');
     // const{cart} = useCartContext();
-    const {cartData} = useCartApi();
+    const { cartData } = useCartApi();
     const itemCount = cartData.length;
     const [isOpenMenu, setOpenMenu] = useState(false);
 
     const toggleMenu = () => {
         setOpenMenu(!isOpenMenu);
     };
+
+    const handleLoginLogout = () => {
+        if (getUser) {
+            sessionStorage.removeItem('userData');
+            setUser(null);
+            navigate('/login')
+        } else {
+            navigate('/login')
+        }
+    };
+
+    useEffect(() => {
+        setUser(sessionStorage.getItem('userData'));
+    })
 
     return (
         <>
@@ -44,9 +61,12 @@ function Navbar() {
                                         <Link to={page.Link} textAlign="center" style={{ textDecoration: 'none', color: 'black' }} >{page.category}</Link>
                                     </MenuItem>
                                 ))}
+                                <Button size="small" sx={{ ml: '2rem' }} variant='contained' onClick={handleLoginLogout}>{getUser ? 'logout' : 'login'}</Button>
+                            </Box>
+                            <Box sx={{ color: "black", justifyContent: "center", alignItems: "center", mt: 1 }}>
                                 <Link to='/my-cart'>
                                     <IconButton aria-label="cart">
-                                        <Badge badgeContent={itemCount>0?itemCount:0} color="secondary">
+                                        <Badge badgeContent={itemCount > 0 ? itemCount : 0} color="secondary">
                                             <ShoppingCartIcon />
                                         </Badge>
                                     </IconButton>
@@ -70,6 +90,8 @@ function Navbar() {
                             <Link to={page.Link} textAlign="center" style={{ textDecoration: 'none', color: 'black' }} >{page.category}</Link>
                         </MenuItem>
                     ))}
+                    <Button size="small" sx={{width:'100%'}} variant='contained' onClick={handleLoginLogout}>{getUser ? 'logout' : 'login'}</Button>
+
                 </List>
             </Drawer>
         </>

@@ -78,7 +78,7 @@ function Products({ data }) {
                                         <CardMedia
                                             sx={{ height: 340 }}
                                             image={item.thumbnail}
-                                            title="green iguana"
+                                            title={item.title}
                                         />
                                         <CardContent>
                                             <Typography gutterBottom variant="h5" component="div" sx={{maxHeight:'40px', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis'}}>

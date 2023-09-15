@@ -2,12 +2,12 @@ import { Box, Button, CardMedia, Container, Icon, TextField, Typography } from '
 import React, { useState } from 'react'
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 
 function Login() {
     // const {history} = useHistory();
+    const navigate = useNavigate();
     const [isLoginData, setLoginData] = useState({
         'email': '',
         'password': '',
@@ -18,12 +18,15 @@ function Login() {
         e.preventDefault();
         try {
             const res = await axios.post('http://127.0.0.1:8000/api/registerLogin', isLoginData);
+            // console.log(res);
             if (res.data.status === 200) {
+                // navigate('/');
                 window.location.href = '/';
-                // history.push('/');
+                sessionStorage.setItem('userData',isLoginData.email);
+                sessionStorage.setItem('id',res.data.id);
             }
             else {
-                window.location.href = '/login';
+                navigate('/login');
             }
             setLoginData({
                 'email': '',

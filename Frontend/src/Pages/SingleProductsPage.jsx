@@ -10,6 +10,8 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useCartContext } from "../Context/CartContext";
+const baseURL = process.env.REACT_APP_BASE_URL;
+
 function SingleProductsPage() {
     const { addToCart } = useCartContext();
 
@@ -20,7 +22,7 @@ function SingleProductsPage() {
 
     const getProductData = async () => {
         try {
-            const res = await axios.get(`http://127.0.0.1:8000/api/posts/${id}`);
+            const res = await axios.get(`${baseURL}/posts/${id}`);
             // console.log(res);
             setProductData(res.data?.post);
         } catch (error) {
@@ -39,12 +41,10 @@ function SingleProductsPage() {
             <Box sx={{ mt: '5rem', mb: '2rem' }}>
                 <Container sx={{ display: 'flex' }}>
                     <Box sx={{}}>
-                        {/* <img src="single-product-01.jpg" alt="" /> */}
+                        {/* <img src={productData?.thumbnail} width='50%' alt={productData?.title} /> */}
                         <CardMedia
                             component="img"
                             alt="green iguana"
-                            height="100%"
-                            width="100%"
                             image={productData?.thumbnail}
                         />
                     </Box>

@@ -4,12 +4,14 @@ import Swal from 'sweetalert2'
 
 const CartApiContextB = createContext();
 const baseURL = process.env.REACT_APP_BASE_URL;
-const API = `${baseURL}/cartlist`;
+const userId = sessionStorage.getItem('id');
 
+const API = `${baseURL}/cartlist/${userId}`;
 export function CartApiProvide({ children }) {
     const [getCartData, setCartData] = useState([]);
     const getCartProductData = async (url) => {
         try {
+            console.log(userId);
             const res = await axios.get(url);
             console.log(res);
             setCartData(res.data?.cartItem);
