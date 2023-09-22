@@ -12,8 +12,12 @@ import { Link } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import BackToTop from "./BackToTop1";
 import { useApi } from "../Context/ApiContext";
+import Login from "../Main/Login";
 function ManProduct() {
-    const {data} = useApi();
+    const { data } = useApi();
+    if (!localStorage.getItem('userData')) {
+        return <Login />
+    }
     return (
         <>
             <Navbar />
@@ -40,19 +44,19 @@ function ManProduct() {
                                     title={item.title}
                                 />
                                 <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div" sx={{maxHeight:'40px', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis'}}>
+                                    <Typography gutterBottom variant="h5" component="div" sx={{ maxHeight: '40px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                                         {item.title}
                                     </Typography>
-                                    <Typography variant="body2" color="text.secondary" sx={{maxHeight:'200px', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis'}}>
-                                        {item.description}                                    
+                                    <Typography variant="body2" color="text.secondary" sx={{ maxHeight: '200px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                        {item.description}
                                     </Typography>
                                 </CardContent>
                                 <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <Typography variant="h6" component='div'>₹{item.price} </Typography>
-                                        <Box sx={{}} >
-                                            <Link to={`/single-product-page/${item.id}`}><IconButton><RemoveRedEyeIcon /></IconButton></Link>
-                                            {/* <IconButton><ShoppingCartIcon /></IconButton> */}
-                                        </Box>
+                                    <Box sx={{}} >
+                                        <Link to={`/single-product-page/${item.id}`}><IconButton><RemoveRedEyeIcon /></IconButton></Link>
+                                        {/* <IconButton><ShoppingCartIcon /></IconButton> */}
+                                    </Box>
                                     <IconButton><ShareIcon /></IconButton>
                                 </CardActions>
                             </Card>

@@ -6,6 +6,8 @@ import Footer from '../Footer/Footer';
 import KidsProducts from '../Sections/KidsProducts';
 import BackToTop from './BackToTop1.jsx';
 import { useApi } from '../Context/ApiContext';
+import Login from '../Main/Login';
+import CarousalSlider from './CarousalSlider';
 // const API = "http://127.0.0.1:8000/api/posts/";
 function HomePage() {
     // const [getData, setData] = useState([]);
@@ -20,13 +22,16 @@ function HomePage() {
     //     getProductData(API);
     // }, []);
      const { data } = useApi();
-     
-
+ 
+     if(!localStorage.getItem('userData')){
+        return <Login/>
+     }
     // Use the data in your component
     // console.log(data);
     return (
         <>
             <Navbar/>
+            <CarousalSlider/>
             <MainBanner />
             <Products data = {data}/>
             <WomenProducts data = {data}/>

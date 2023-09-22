@@ -13,8 +13,12 @@ import { Link } from "react-router-dom";
 import BackToTop from "./BackToTop1.jsx";
 import Footer from "../Footer/Footer";
 import { useApi } from "../Context/ApiContext";
+import Login from "../Main/Login";
 function AccessoriesPage() {
     const { data } = useApi();
+    if (!localStorage.getItem('userData')) {
+        return <Login />
+    }
     return (
         <>
             <Navbar />
@@ -43,10 +47,10 @@ function AccessoriesPage() {
                                             title={item.title}
                                         />
                                         <CardContent>
-                                            <Typography gutterBottom variant="h5" component="div" sx={{maxHeight:'40px', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis'}}>
+                                            <Typography gutterBottom variant="h5" component="div" sx={{ maxHeight: '40px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                                                 {item.title}
                                             </Typography>
-                                            <Typography variant="body2" color="text.secondary" sx={{maxHeight:'200px', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis'}}>
+                                            <Typography variant="body2" color="text.secondary" sx={{ maxHeight: '200px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                                                 {item.description}
                                             </Typography>
                                         </CardContent>

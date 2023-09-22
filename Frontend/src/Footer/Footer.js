@@ -3,6 +3,7 @@ import React from "react";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import { Link } from "react-router-dom";
 function Footer() {
     return (
         <>
@@ -22,18 +23,32 @@ function Footer() {
                     <Box>
                         <Stack sx={{ color: 'white' }}>
                             <ListItem sx={{ fontWeight: 900, fontSize: '1.2rem' }}> Shopping & Categories</ListItem>
-                            <ListItem>Men's Shopping</ListItem>
-                            <ListItem>Women's Shopping</ListItem>
-                            <ListItem>Kid's Shopping</ListItem>
+                            <Link to='/men-product'>
+                                <ListItem sx={{ textDecoration: 'none', color: 'white' }}>Men's Shopping</ListItem>
+                            </Link>
+                            <Link to='/women-product'>
+                                <ListItem sx={{ textDecoration: 'none', color: 'white' }}>Women's Shopping</ListItem>
+                            </Link>
+                            <Link to='/kids-product'>
+                                <ListItem sx={{ textDecoration: 'none', color: 'white' }}>Kid's Shopping</ListItem>
+                            </Link>
                         </Stack>
                     </Box>
                     <Box>
                         <Stack sx={{ color: 'white' }}>
                             <ListItem sx={{ fontWeight: 900, fontSize: '1.2rem' }}>Useful Links</ListItem>
-                            <ListItem>Homepage</ListItem>
-                            <ListItem>About Page</ListItem>
-                            <ListItem>Help</ListItem>
-                            <ListItem>Contact Us</ListItem>
+                            <Link to='/'>
+                                <ListItem sx={{ textDecoration: 'none', color: 'white' }}>Homepage</ListItem>
+                            </Link>
+                            <Link to='/about'>
+                                <ListItem sx={{ textDecoration: 'none', color: 'white' }}>About Page</ListItem>
+                            </Link>
+                            <Link>
+                                <ListItem sx={{ textDecoration: 'none', color: 'white' }}>Help</ListItem>
+                            </Link>
+                            <Link to='/contact'>
+                                <ListItem sx={{ textDecoration: 'none', color: 'white' }}>Contact Us</ListItem>
+                            </Link>
                         </Stack>
                     </Box>
                     <Box>

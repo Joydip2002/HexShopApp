@@ -112,7 +112,7 @@ export function CartApiProvide({ children }) {
     }, []);
 
     return (
-        <CartApiContextB.Provider value={{ cartData: getCartData, removeItem: removeItem, reduceQuantity: reduceQuantity, IncreaseQuantity }}>
+        <CartApiContextB.Provider value={{ cartData: getCartData, setCartData , removeItem: removeItem, reduceQuantity: reduceQuantity, IncreaseQuantity }}>
             {children}
         </CartApiContextB.Provider>
     )

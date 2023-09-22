@@ -19,38 +19,39 @@ import Login from "./Main/Login";
 import Registration from "./Main/Registration";
 import Success from "./Pages/success";
 import Cancel from "./Pages/Cancel";
+import Myaccount from "./Main/Myaccount";
 
 
 function App() {
   return (
-   
-      <BrowserRouter>
-        <Routes>
-          {/* Login */}
-          <Route path="login" element = {<Login/>} />
-          <Route path="register" element = {<Registration/>} />
+    <BrowserRouter>
+      <Routes>
+        {/* Login */}
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Registration />} />
+        <Route path="my-account" element={<Myaccount/>}></Route>
 
-          <Route path="/" element={<HomePage />} />
-          <Route path="single-product-page/:id" element={<SingleProductsPage />} />
-          <Route path="contact" element={<ContactUsPage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="men-product" element={<ManProduct />} />
-          <Route path="women-product" element={<WomenProducts />} />
-          <Route path="kids-product" element={<KidsProducts />} />
-          <Route path="accessories-product" element={<AccessoriesPage />} />
-          <Route path="all-product" element={<AllProduct />} />
-          <Route path="back-To-Top" element={<BackToTop />} />
-          <Route path="my-cart" element={<Mycart/>} />
-          <Route path="payment-page" element={<PaymentForm/>} />
-          {/* <Route path="payment-page" element={<BuyButtonComponent/>} /> */}
-          <Route path="*" element={<ErrorPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="single-product-page/:id" element={<SingleProductsPage />} />
+        <Route path="contact" element={<ContactUsPage />} />
+        <Route path="about" element={<AboutPage />} />
+        <Route path="men-product" element={<ManProduct />} />
+        <Route path="women-product" element={<WomenProducts />} />
+        <Route path="kids-product" element={<KidsProducts />} />
+        <Route path="accessories-product" element={<AccessoriesPage />} />
+        <Route path="all-product" element={<AllProduct />} />
+        <Route path="back-To-Top" element={<BackToTop />} />
+        <Route path="my-cart" element={<Mycart />} />
+        <Route path="payment-page" element={<PaymentForm />} />
+        {/* <Route path="payment-page" element={<BuyButtonComponent/>} /> */}
+        <Route path="*" element={<ErrorPage />} />
 
-          {/* Admin route */}
-          <Route path="admin-dashboard" element={<AdminDashboard />} />
-          <Route path="success" element={<Success />} />
-          <Route path="cancel" element={<Cancel />} />
-        </Routes>
-      </BrowserRouter>
+        {/* Admin route */}
+        <Route path="admin-dashboard" element={<AdminDashboard />} />
+        <Route path="success" element={<Success />} />
+        <Route path="cancel" element={<Cancel />} />
+      </Routes>
+    </BrowserRouter>
 
   );
 }

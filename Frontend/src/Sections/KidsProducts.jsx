@@ -14,6 +14,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { golbalApiContext } from "../App";
+import Aos from "aos";
+import 'aos/dist/aos.css'
 // import Link from '@mui/material/Link';
 // import axios from 'axios';
 
@@ -51,8 +53,11 @@ function Products({ data }) {
     //         console.log(isBtnOpen);
     //     }
     // }, [isBtnOpen])
+    useEffect(() => {
+        Aos.init({duration:2000})
+    }, [])
     return (
-        <div id="kids-product">
+        <div id="kids-product" data-aos='fade-up' data-aos-duration='2500'>
 
             <Border></Border>
             <Container sx={{ my: '1rem' }}>

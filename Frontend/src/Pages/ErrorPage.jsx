@@ -1,7 +1,11 @@
 import { Box, CardMedia } from '@mui/material';
 import React from 'react';
+import Login from '../Main/Login';
 
 function ErrorPage() {
+    if (!localStorage.getItem('userData')) {
+        return <Login />
+    }
     return (
         <>
             <Box>

@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useCartContext } from "../Context/CartContext";
+import Login from "../Main/Login";
 const baseURL = process.env.REACT_APP_BASE_URL;
 
 function SingleProductsPage() {
@@ -20,6 +21,7 @@ function SingleProductsPage() {
     const [productData, setProductData] = useState(null);
     // console.log(productData);
 
+   
     const getProductData = async () => {
         try {
             const res = await axios.get(`${baseURL}/posts/${id}`);

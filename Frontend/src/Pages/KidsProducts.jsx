@@ -13,8 +13,12 @@ import { Link } from "react-router-dom";
 import BackToTop from "./BackToTop1.jsx";
 import Footer from "../Footer/Footer";
 import { useApi } from "../Context/ApiContext";
+import Login from "../Main/Login";
 function KidsProducts() {
     const { data } = useApi();
+    if(!localStorage.getItem('userData')){
+        return <Login/>
+     }
     return (
         <>
             <Navbar />

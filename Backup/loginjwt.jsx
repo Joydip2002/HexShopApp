@@ -1,37 +1,48 @@
 import { Box, Button, CardMedia, Container, Icon, TextField, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import HomePage from '../Pages/HomePage';
 
 function Login() {
     // const {history} = useHistory();
-    const authData = localStorage.getItem('userData');
-    console.log(authData);
     const navigate = useNavigate();
+    const[token,setToken] = useState();
+    const[user,setUser] = useState();
     const [isLoginData, setLoginData] = useState({
         'email': '',
         'password': '',
         'error_list': []
     })
 
-    useEffect(() => {
-        if (authData) {
-            navigate('/');
-        }
-    }, [authData])
+    const getToken=()=>{
+        const tokenString = sessionStorage.getItem('token');
+        const userToken = sessionStorage.getItem('user');
+        return userToken;
+    }
+
+    const saveToken = (user,token)=>{
+        sessionStorage.setItem('token',JSON.stringify(token));
+        sessionStorage.setItem('user',JSON.stringify(user));
+        
+        setToken(token);
+        setUser(user);
+        window.location.href = '/';
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const res = await axios.post('http://127.0.0.1:8000/api/registerLogin', isLoginData);
+            saveToken(res.data.user,res.data.access_token);
             // console.log(res);
             if (res.data.status === 200) {
                 // navigate('/');
-                window.location.href = '/';
-                localStorage.setItem('userData', isLoginData.email);
-                sessionStorage.setItem('id', res.data.id);
+                // window.location.href = '/';
+                // sessionStorage.setItem('userData',isLoginData.email);
+                // sessionStorage.setItem('id',res.data.id);
+               
             }
             else {
                 navigate('/login');
@@ -102,7 +113,7 @@ function Login() {
                                 </Box>
                             </form>
                         </Box>
-                        <Typography sx={{ fontSize: '15px', textAlign: 'center', mt: 3 }}>Don't have an account?&nbsp;<span style={{ color: 'blue' }}><Link to='/register'>Create Account</Link></span></Typography>
+                        <Typography sx={{ fontSize: '15px', textAlign: 'center',mt:3}}>Don't have an account?&nbsp;<span style={{ color: 'blue' }}><Link to='/register'>Create Account</Link></span></Typography>
                     </Box>
                 </Box>
             </Container>

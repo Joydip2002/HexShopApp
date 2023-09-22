@@ -1,13 +1,17 @@
 import React from 'react';
 import Navbar from '../Navbar/navbar';
-import { Box, ButtonGroup, Card, CardMedia, Container, List,  Stack, Typography } from "@mui/material";
+import { Box, ButtonGroup, Card, CardMedia, Container, List, Stack, Typography } from "@mui/material";
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import Footer from '../Footer/Footer';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import BackToTop from './BackToTop1.jsx';
+import Login from '../Main/Login';
 function AboutPage() {
+    if (!localStorage.getItem('userData')) {
+        return <Login />
+    }
     return (
         <>
             <Navbar />
@@ -19,8 +23,8 @@ function AboutPage() {
                     </Stack>
                 </Typography>
             </Box>
-            <Box sx={{ mt: '5rem', mb: '2rem'  }}>
-                <Container sx={{ display: 'flex', justifyContent:'center',flexWrap:'wrap'}}>
+            <Box sx={{ mt: '5rem', mb: '2rem' }}>
+                <Container sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
                     <Box sx={{}}>
                         {/* <img src="single-product-01.jpg" alt="" /> */}
                         <CardMedia
@@ -45,7 +49,7 @@ function AboutPage() {
                             </Box>
                         </Box>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', }}>
-                            <ButtonGroup variant="outlined" aria-label="outlined button group" size="small" sx={{fontSize:'2rem'}}>
+                            <ButtonGroup variant="outlined" aria-label="outlined button group" size="small" sx={{ fontSize: '2rem' }}>
                                 <FacebookIcon />
                                 <LinkedInIcon />
                                 <TwitterIcon />
@@ -54,7 +58,7 @@ function AboutPage() {
                     </Box>
                 </Container>
             </Box>
-            <BackToTop/>
+            <BackToTop />
             <Footer />
         </>
     )

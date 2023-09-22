@@ -1,8 +1,9 @@
-import { AppBar, Box, Container, IconButton, MenuItem, Toolbar, Typography, Drawer, List, Button } from "@mui/material";
+import { AppBar, Box, Container, IconButton, MenuItem, Toolbar, Typography, Drawer, List, Button, Menu } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import React, { useEffect, useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
 // import { Link } from "react-router-dom";
+import AccountCircle from '@mui/icons-material/AccountCircle';
 import { HashLink as Link } from 'react-router-hash-link';
 import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -27,6 +28,7 @@ function Navbar() {
     const { cartData } = useCartApi();
     const itemCount = cartData.length;
     const [isOpenMenu, setOpenMenu] = useState(false);
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
     const toggleMenu = () => {
         setOpenMenu(!isOpenMenu);
@@ -34,16 +36,22 @@ function Navbar() {
 
     const handleLoginLogout = () => {
         if (getUser) {
-            sessionStorage.removeItem('userData');
+            localStorage.removeItem('userData');
             setUser(null);
             navigate('/login')
         } else {
             navigate('/login')
         }
     };
+    const handleMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     useEffect(() => {
-        setUser(sessionStorage.getItem('userData'));
+        setUser(localStorage.getItem('userData'));
     })
 
     return (
@@ -55,13 +63,13 @@ function Navbar() {
                             <Typography sx={{ ml: 2, flex: 1 }} variant="a" component="div">
                                 <Link to="/"> <img src="Images/logo.png" alt="" /></Link>
                             </Typography>
+
                             <Box sx={{ color: "black", justifyContent: "center", alignItems: "center", display: { xs: 'none', md: 'flex' }, mr: 1 }}>
                                 {pages.map((page, index) => (
                                     <MenuItem key={index}>
-                                        <Link to={page.Link} textAlign="center" style={{ textDecoration: 'none', color: 'black' }} >{page.category}</Link>
+                                        <Link to={page.Link}  style={{ textDecoration: 'none', color: 'black' }} >{page.category}</Link>
                                     </MenuItem>
                                 ))}
-                                <Button size="small" sx={{ ml: '2rem' }} variant='contained' onClick={handleLoginLogout}>{getUser ? 'logout' : 'login'}</Button>
                             </Box>
                             <Box sx={{ color: "black", justifyContent: "center", alignItems: "center", mt: 1 }}>
                                 <Link to='/my-cart'>
@@ -72,6 +80,36 @@ function Navbar() {
                                     </IconButton>
                                 </Link>
                             </Box>
+                            <IconButton
+                                // size="large"
+                                aria-label="account of current user"
+                                aria-controls="menu-appbar"
+                                aria-haspopup="true"
+                                onClick={handleMenu}
+                            // color="inherit"
+                            >
+                                <AccountCircle />
+                            </IconButton>
+                            <Menu
+                                id="menu-appbar"
+                                anchorEl={anchorEl}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorEl)}
+                                onClose={handleClose}
+                            >
+                                {/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
+                                <Link to='/my-account' style={{ textDecoration: 'none', color: 'black' }}><MenuItem onClick={handleClose}>My account</MenuItem></Link>
+                                <MenuItem onClick={handleClose}> <Button size="small" sx={{}} variant='contained' onClick={handleLoginLogout}>{getUser ? 'logout' : 'login'}</Button></MenuItem>
+                            </Menu>
+
                             <IconButton sx={{ display: { md: 'none' } }} onClick={toggleMenu}>
                                 <MenuIcon />
                             </IconButton>
@@ -90,7 +128,7 @@ function Navbar() {
                             <Link to={page.Link} textAlign="center" style={{ textDecoration: 'none', color: 'black' }} >{page.category}</Link>
                         </MenuItem>
                     ))}
-                    <Button size="small" sx={{width:'100%'}} variant='contained' onClick={handleLoginLogout}>{getUser ? 'logout' : 'login'}</Button>
+                    <Button size="small" sx={{ width: '100%' }} variant='contained' onClick={handleLoginLogout}>{getUser ? 'logout' : 'login'}</Button>
 
                 </List>
             </Drawer>

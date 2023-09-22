@@ -8,7 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Box, Button, ButtonGroup, CircularProgress, IconButton, Typography } from '@mui/material';
+import { Box, Button, ButtonGroup, IconButton, Typography } from '@mui/material';
 import Navbar from '../Navbar/navbar';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom';
@@ -17,85 +17,33 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { useCartApi } from '../Context/CartApiContextB';
 import { loadStripe } from '@stripe/stripe-js';
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import Swal from 'sweetalert2';
-import Login from '../Main/Login';
-import HomePage from './HomePage';
-
-
-// const baseURL = process.env.REACT_APP_BASE_URL;
-// const userId = sessionStorage.getItem('id');
-// const API = `${baseURL}/cartlist/${userId}`;
 
 function Mycart() {
+  const { cartData, removeItem, reduceQuantity, IncreaseQuantity } = useCartApi();
 
-  // toast.configure();
-  const { cartData, removeItem, reduceQuantity, setCartData, IncreaseQuantity } = useCartApi();
-  const [loading, setLoading] = useState(true);
-
-  const[updateCartData,setUpdateData] = useState([]);
-  // if (!sessionStorage.getItem('userData')) {
-  //   return <Login />
-  // }
-
-
-  // Payment Part
-  // const makePayment = async () => {
-  //   const stripe = await loadStripe("pk_test_51NpTJSSJq8hcq8qPS6OJNbi2G46ZN3y54AplJyppTpGRiZ28MJDxlU8jyjcd41nzvQtNWgFR6QGkASJYyyWkKB4D00dnqFQZXT");
-  //   const body = {
-  //     products: cartData
-  //   }
-  //   const headers = {
-  //     "Content-Type": "application/json",
-  //   }
-  //   const response = await fetch('http://localhost:8000/api/payment', {
-  //     method: 'POST',
-  //     headers: headers,
-  //     body: JSON.stringify(body)
-  //   });
-
-  //   const session = await response.json();
-
-  //   const result = stripe.redirectToCheckout({
-  //     sessionId: session.id
-  //   });
-
-  //   if (result.error) {
-  //     console.log(result.error);
-  //   }
-  // }
-  // const getCartProductData = async (url) => {
-  //   try {
-  //     console.log(userId);
-  //     const res = await axios.get(url);
-  //     console.log("caraddata = ", res);
-  //     setUpdateData(res.data?.cartItem);
-  //   } catch (error) {
-  //     console.error("Error fetching data: ", error);
-  //   }
-  // }
-  useEffect(() => {
-    // getCartProductData(API);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
-
-  const handleToken = async (token, addresses) => {
-    const response = await axios.post('http://localhost:8000/api/payment', { token, cartData })
-    console.log(response.status);
-    if (response.status === 200) {
-      Swal.fire({
-        icon: 'success',
-        title: "Payment Successfully"
-      })
+// Payment Part
+  const makePayment = async () => {
+    const stripe = await loadStripe("pk_test_51NpTJSSJq8hcq8qPS6OJNbi2G46ZN3y54AplJyppTpGRiZ28MJDxlU8jyjcd41nzvQtNWgFR6QGkASJYyyWkKB4D00dnqFQZXT");
+    const body = {
+      products: cartData
     }
-    else {
-      Swal.fire({
-        icon: 'success',
-        title: "Payment Failed!"
-      })
+    const headers = {
+      "Content-Type": "application/json",
+    }
+    const response = await fetch('http://localhost:8000/api/payment', {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(body)
+    });
+
+    const session = await response.json();
+
+    const result = stripe.redirectToCheckout({
+      sessionId: session.id
+    });
+    
+    if (result.error) {
+      console.log(result.error);
     }
   }
 
@@ -120,7 +68,7 @@ function Mycart() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {loading ? (<CircularProgress />) : cartData.map((row) => (
+            {cartData.map((row) => (
               <TableRow
                 key={row.name}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -152,16 +100,9 @@ function Mycart() {
             {/* <Link to='/checkout'><button type='submit' class='btn btn-primary mt-3 mb-3'>Checkout Now!</button></Link> */}
           </Box>
           <Box sx={{ display: 'flex', justifyContent: '' }}>
-
-            <StripeCheckout
-              stripeKey='pk_test_51NpTJSSJq8hcq8qPS6OJNbi2G46ZN3y54AplJyppTpGRiZ28MJDxlU8jyjcd41nzvQtNWgFR6QGkASJYyyWkKB4D00dnqFQZXT'
-              token={handleToken}
-              amount={cartData.price * 100}
-              title={cartData.title}
-              billingAddress
-              shippingAddress
-            />
-
+            <Button variant='contained' onClick={makePayment}>
+              Buy Now
+            </Button>
           </Box>
         </Box>
       </TableContainer>

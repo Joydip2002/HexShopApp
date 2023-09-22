@@ -44,12 +44,22 @@ function Registration() {
                 navigate('/login');
             }
             else{
-                setFormData({
-                    'errorList' : res.data.error
-                })
+               
             }
         } catch (error) {
-            console.log(error);
+            console.log(error.response.data.errors);
+            setFormData({
+                name: '',
+                email: '',
+                address: '',
+                mobile: '',
+                password: '',
+                errorList : error.response.data.errors
+            })
+            Swal.fire({
+                text : formData.errorList.email+" "+formData.errorList.mobile,
+                icon : 'warning'
+            })
         }
         
     }
@@ -93,6 +103,7 @@ function Registration() {
                                         onChange={handleInputSubmit}
                                     />
                                 </Box>
+                                {/* <span className='alert text-danger'>{error_list.}</span> */}
                                 <Box>
                                     <Icon sx={{ height: '100%' }}>
                                         <EmailIcon />

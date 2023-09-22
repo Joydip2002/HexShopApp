@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Box, Card, CardActions, CardContent, CardMedia, Container, IconButton, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
 import 'swiper/css';
@@ -10,6 +10,8 @@ import 'swiper/css/scrollbar';
 import ShareIcon from '@mui/icons-material/Share';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { Link } from "react-router-dom";
+import Aos from "aos";
+import 'aos/dist/aos.css'
 
 const Border = styled('div')(({ theme }) => ({
     'border': '2px solid gray',
@@ -17,9 +19,13 @@ const Border = styled('div')(({ theme }) => ({
     'margin-top': '3rem'
 }));
 
+
 function WomenProducts({ data }) {
+    useEffect(() => {
+        Aos.init({ duration: 2000 })
+    }, [])
     return (
-        <div id="women-products">
+        <div id="women-products" data-aos='fade-up' data-aos-duration='2500'>
             <Border></Border>
             <Container>
                 <Box sx={{ py: 4 }}>
@@ -47,10 +53,10 @@ function WomenProducts({ data }) {
                                             title={item.title}
                                         />
                                         <CardContent>
-                                            <Typography gutterBottom variant="h5" component="div" sx={{maxHeight:'40px', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis'}}>
+                                            <Typography gutterBottom variant="h5" component="div" sx={{ maxHeight: '40px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                                                 {item.title}
                                             </Typography>
-                                            <Typography variant="body2" color="text.secondary" sx={{maxHeight:'200px', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis'}}>
+                                            <Typography variant="body2" color="text.secondary" sx={{ maxHeight: '200px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                                                 {item.description}
                                             </Typography>
                                         </CardContent>

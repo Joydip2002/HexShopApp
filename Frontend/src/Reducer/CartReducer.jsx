@@ -1,7 +1,8 @@
 import axios from "axios";
+import { useEffect } from "react";
 
 function CartReducer(state, action) {
-    if (action.type === "ADD_TO_CART") {
+    if (action.type === "ADD_TO_CART") { 
         let products = action.payload;
         console.log("add to cart", products);
 
@@ -13,7 +14,7 @@ function CartReducer(state, action) {
             quantity: products.isSetData,
             user_id : sessionStorage.getItem('id')
         };
-        console.log("here is data",cartProduct);
+        console.log("here is data",cartProduct); 
         const addToCart = async () => {
             try {
                 const response = await axios.post("http://127.0.0.1:8000/api/store-cartlist", cartProduct);

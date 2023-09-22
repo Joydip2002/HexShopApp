@@ -13,9 +13,13 @@ import { Link } from "react-router-dom";
 import BackToTop from "./BackToTop1.jsx";
 import Footer from "../Footer/Footer";
 import { useApi } from "../Context/ApiContext";
+import Login from "../Main/Login";
 function ManProduct() {
     const { data } = useApi();
     // alert("home")
+    if(!localStorage.getItem('userData')){
+        return <Login/>
+     }
     return (
         <>
             <Navbar />
@@ -53,12 +57,10 @@ function ManProduct() {
                                         </CardContent>
                                         <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <Typography variant="h6" component='div'>₹{item.price} </Typography>
-                                            <productsHover >
                                                 <Box sx={{}} >
                                                     <Link to={`/single-product-page/${item.id}`}><IconButton><RemoveRedEyeIcon /></IconButton></Link>
                                                     {/* <IconButton><ShoppingCartIcon /></IconButton> */}
                                                 </Box>
-                                            </productsHover>
                                             <IconButton><ShareIcon /></IconButton>
                                         </CardActions>
                                     </Card>

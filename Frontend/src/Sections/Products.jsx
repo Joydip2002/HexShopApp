@@ -16,7 +16,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 // import Link from '@mui/material/Link';
 // import axios from 'axios';
-
+import Aos from "aos";
+import 'aos/dist/aos.css'
 
 const Border = styled('div')(({ theme }) => ({
     'border': '2px solid gray',
@@ -33,16 +34,14 @@ function Products({ data }) {
     const theme = useTheme();
 
     // const [isBtnOpen, setBtnOpen] = useState('');
-    // useEffect(() => {
-    //     if (isBtnOpen !== "") {
-    //         console.log(isBtnOpen);
-    //     }
-    // }, [isBtnOpen])
+    useEffect(() => {
+        Aos.init({duration:2000})
+    }, [])
 
 
 
     return (
-        <div id="men-products">
+        <div id="men-products" data-aos='fade-up' data-aos-duration='2500'>
 
             <Border></Border>
             <Container>
