@@ -29,7 +29,6 @@ db.connect((err) => {
 // checkout API
 app.post("/api/payment", async (req, res) => {
     const { products } = req.body;
-
     const lineItems = products.map((product) => ({
         price_data: {
             currency: "inr",
@@ -46,26 +45,27 @@ app.post("/api/payment", async (req, res) => {
             payment_method_types: ["card"],
             line_items: lineItems,
             mode: "payment",
+            allow_promotion_codes: true,
             success_url: `http://localhost:3000/success?payment_status=success`,
             cancel_url: "http://localhost:3000/cancel",
         });
-
         const cl = products.length;
-        const productNames = products.map((product) => product.title).join(', ');
+        const productNames =  products.map((product) => product.title).join(', ');
         // const totalPrice = products.reduce((total, product) => total + product.price, 0);
         const totalPrice = cl > 0 ? products.reduce((accumulator, currentItem) => accumulator + (currentItem.price * currentItem.quantity), 0) : 0;
         const totalQuantity = products.reduce((total, product) => total + product.quantity, 0);
-
+        const userid = products[0].user_fk_id;
         const paymentInfo = {
             session_id: session.id,
             products: productNames,
             price: totalPrice,
-            quantity: totalQuantity,
+            quantity: totalQuantity,   
+            user_id: userid,
             created_at: date.format(now, 'YYYY/MM/DD HH:mm:ss'),
             updated_at: date.format(now, 'YYYY/MM/DD HH:mm:ss')
         };
 
-        db.query('INSERT INTO payments SET ?', paymentInfo, (err, result) => {
+       db.query('INSERT INTO payments SET ?', paymentInfo, (err, result) => {
             if (err) {
                 console.error('Error inserting payment into the database:', err);
                 res.status(500).json({ error: 'Error processing payment' });
@@ -82,10 +82,8 @@ app.post("/api/payment", async (req, res) => {
 
 app.get("/success", (req, res) => {
     const { payment_status, session_id } = req.query;
-
     console.log("Received payment_status:", payment_status);
     console.log("Received session_id:", session_id);
-
     if (payment_status === "success" && session_id) {
         db.query(
             'UPDATE payments SET status = ? WHERE session_id = ?',
@@ -96,7 +94,7 @@ app.get("/success", (req, res) => {
                     res.status(500).json({ error: 'Error updating payment status' });
                 } else {
                     console.log('Payment status updated successfully');
-                    res.send('Payment successful'); 
+                    res.send('Payment successful');
                 }
             }
         );

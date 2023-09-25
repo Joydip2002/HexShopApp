@@ -9,7 +9,7 @@ import HomePage from '../Pages/HomePage';
 function Login() {
     // const {history} = useHistory();
     const authData = localStorage.getItem('userData');
-    console.log(authData);
+    // console.log(authData);
     const navigate = useNavigate();
     const [isLoginData, setLoginData] = useState({
         'email': '',

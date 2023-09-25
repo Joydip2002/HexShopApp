@@ -41,30 +41,30 @@ function Mycart() {
 
 
   // Payment Part
-  // const makePayment = async () => {
-  //   const stripe = await loadStripe("pk_test_51NpTJSSJq8hcq8qPS6OJNbi2G46ZN3y54AplJyppTpGRiZ28MJDxlU8jyjcd41nzvQtNWgFR6QGkASJYyyWkKB4D00dnqFQZXT");
-  //   const body = {
-  //     products: cartData
-  //   }
-  //   const headers = {
-  //     "Content-Type": "application/json",
-  //   }
-  //   const response = await fetch('http://localhost:8000/api/payment', {
-  //     method: 'POST',
-  //     headers: headers,
-  //     body: JSON.stringify(body)
-  //   });
+  const makePayment = async () => {
+    const stripe = await loadStripe("pk_test_51NpTJSSJq8hcq8qPS6OJNbi2G46ZN3y54AplJyppTpGRiZ28MJDxlU8jyjcd41nzvQtNWgFR6QGkASJYyyWkKB4D00dnqFQZXT");
+    const body = {
+      products: cartData
+    }
+    const headers = {
+      "Content-Type": "application/json",
+    }
+    const response = await fetch('http://localhost:8000/api/payment', {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(body)
+    });
 
-  //   const session = await response.json();
+    const session = await response.json();
 
-  //   const result = stripe.redirectToCheckout({
-  //     sessionId: session.id
-  //   });
+    const result = stripe.redirectToCheckout({
+      sessionId: session.id
+    });
 
-  //   if (result.error) {
-  //     console.log(result.error);
-  //   }
-  // }
+    if (result.error) {
+      console.log(result.error);
+    }
+  }
   // const getCartProductData = async (url) => {
   //   try {
   //     console.log(userId);
@@ -82,22 +82,22 @@ function Mycart() {
     }, 1000);
   }, []);
 
-  const handleToken = async (token, addresses) => {
-    const response = await axios.post('http://localhost:8000/api/payment', { token, cartData })
-    console.log(response.status);
-    if (response.status === 200) {
-      Swal.fire({
-        icon: 'success',
-        title: "Payment Successfully"
-      })
-    }
-    else {
-      Swal.fire({
-        icon: 'success',
-        title: "Payment Failed!"
-      })
-    }
-  }
+  // const handleToken = async (token, addresses) => {
+  //   const response = await axios.post('http://localhost:8000/api/payment', { token, cartData })
+  //   console.log(response.status);
+  //   if (response.status === 200) {
+  //     Swal.fire({
+  //       icon: 'success',
+  //       title: "Payment Successfully"
+  //     })
+  //   }
+  //   else {
+  //     Swal.fire({
+  //       icon: 'success',
+  //       title: "Payment Failed!"
+  //     })
+  //   }
+  // }
 
   const cl = cartData.length;
   const totalSum = cl > 0 ? cartData.reduce((accumulator, currentItem) => accumulator + (currentItem.price * currentItem.quantity), 0) : 0;
@@ -149,9 +149,9 @@ function Mycart() {
           <Box sx={{ position: 'absolute', right: '115px' }}>
             <h6 style={{}}>{`Total Price : ₹${totalSum}`}</h6>
             <br />
-            {/* <Link to='/checkout'><button type='submit' class='btn btn-primary mt-3 mb-3'>Checkout Now!</button></Link> */}
+            <button type='submit' class='btn btn-primary mt-3 mb-3' onClick={makePayment}>Checkout Now!</button> 
           </Box>
-          <Box sx={{ display: 'flex', justifyContent: '' }}>
+          {/* <Box sx={{ display: 'flex', justifyContent: '' }}>
 
             <StripeCheckout
               stripeKey='pk_test_51NpTJSSJq8hcq8qPS6OJNbi2G46ZN3y54AplJyppTpGRiZ28MJDxlU8jyjcd41nzvQtNWgFR6QGkASJYyyWkKB4D00dnqFQZXT'
@@ -162,7 +162,7 @@ function Mycart() {
               shippingAddress
             />
 
-          </Box>
+          </Box> */}
         </Box>
       </TableContainer>
     </div>

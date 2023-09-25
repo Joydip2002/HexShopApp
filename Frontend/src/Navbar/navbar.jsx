@@ -37,6 +37,8 @@ function Navbar() {
     const handleLoginLogout = () => {
         if (getUser) {
             localStorage.removeItem('userData');
+            // localStorage.removeItem('id');
+            sessionStorage.removeItem('id')
             setUser(null);
             navigate('/login')
         } else {

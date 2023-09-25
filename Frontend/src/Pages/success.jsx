@@ -8,22 +8,22 @@ const baseURL = process.env.REACT_APP_BASE_URL;
 
 function Success() {
 
-  // const deleteItemsInCart = async () => {
-  //   try {
-  //     // console.log("calling");
-  //     const response = await axios.get(`${baseURL}/deleteAll`);
-  //     if (response.status === 200) {
-  //       console.log('Items in the cart have been deleted.');
-  //     } else {
-  //       console.error('Failed to delete items in the cart.');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error occurred while deleting items in the cart:', error);
-  //   }
-  // };
-  // const handleReturnToHomepage = async () => {
-  //   await deleteItemsInCart();
-  // };
+  const deleteItemsInCart = async () => {
+    try {
+      // console.log("calling");
+      const response = await axios.get(`${baseURL}/deleteAll`);
+      if (response.status === 200) {
+        console.log('Items in the cart have been deleted.');
+      } else {
+        console.error('Failed to delete items in the cart.');
+      }
+    } catch (error) {
+      console.error('Error occurred while deleting items in the cart:', error);
+    }
+  };
+  const handleReturnToHomepage = async () => {
+    await deleteItemsInCart();
+  };
 
 
   return (
@@ -42,7 +42,7 @@ function Success() {
             size="large"
             fullWidth
             style={{ marginTop: '2rem' }}
-            // onClick={handleReturnToHomepage}
+            onClick={handleReturnToHomepage}
           >
             Return to Homepage
           </Button>

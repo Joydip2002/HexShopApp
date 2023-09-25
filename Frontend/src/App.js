@@ -20,6 +20,7 @@ import Registration from "./Main/Registration";
 import Success from "./Pages/success";
 import Cancel from "./Pages/Cancel";
 import Myaccount from "./Main/Myaccount";
+import Dashboard from "./Admin/Dashboard";
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
         <Route path="admin-dashboard" element={<AdminDashboard />} />
         <Route path="success" element={<Success />} />
         <Route path="cancel" element={<Cancel />} />
+        <Route path="dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
 
